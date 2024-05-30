@@ -10,7 +10,7 @@ class Author(models.Model):
         pRat = 0
         pRat += postRat.get('postRating') or 0.0
 
-        comRat = self.authorUser.comment_set.aggrigate(comRating=Sum('rating'))
+        comRat = self.authorUser.comment_set.aggregate(comRating=Sum('rating'))
         cRat = 0
         cRat += comRat.get('comRating') or 0.0
 
@@ -22,7 +22,6 @@ class Author(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=70,
                             unique=True)
-    pass
 
 class Post(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
